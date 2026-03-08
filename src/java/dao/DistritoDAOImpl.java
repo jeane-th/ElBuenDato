@@ -27,10 +27,10 @@ public class DistritoDAOImpl  implements DistritoDAO{
     public List<Distrito> listar(){
         List<Distrito> lista = new ArrayList <>();
         
-        String sql = "SELECT * FROM distritos";
+        String sqlLocal = "SELECT * FROM distritos";
         try{
             con = Conexion.getConexion();
-            ps = con.prepareStatement(sql);
+            ps = con.prepareStatement(sqlLocal);
             rs = ps.executeQuery();
             
             while (rs.next()){

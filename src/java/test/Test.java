@@ -20,9 +20,10 @@ public class Test {
 
         //dao.listar().forEach(System.out::println);
         // 1. Instanciamos el DAO
-      //  LocalDAO dao = new LocalDAOImpl();
-        DistritoDAO dao = new DistritoDAOImpl();
-        dao.listar().forEach(System.out::println);
+        LocalDAO dao = new LocalDAOImpl();
+        dao.eliminar(15);
+        //DistritoDAO dao = new DistritoDAOImpl();
+        //dao.listar().forEach(System.out::println);
         // 2. Creamos el objeto Local (asegúrate que tu constructor coincida con estos parámetros)
         // nombre, direccion, id_distrito, pagina_web, especialidad
         // Local nuevo = new Local("La Lucha Sanguchería", "Av. Santa Cruz 847", 1, "https://lalucha.com.pe", "Sánguches Criollos");

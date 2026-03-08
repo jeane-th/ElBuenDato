@@ -137,7 +137,7 @@
                                     <th class="py-2 px-6 text-left">${l.nombre}</th>
                                     <td class="py-2 px-6 text-left text-slate-400">${l.direccion}</td>
                                     <td class="py-2 px-6 text-left text-slate-400">
-                                        <a href="${l.pagina_web}" target="_blank" class="m-auto">
+                                        <a href="${l.pagina_web}" target="_blank" class="m-auto flex justify-center">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"
                                                  stroke-linecap="round" stroke-linejoin="round"
@@ -150,7 +150,7 @@
                                     <td class="py-2 px-6 text-left text-slate-400">${l.distrito}</td>
                                     <td class="py-2 px-6 text-left text-slate-400">
                                         <div class="flex flex-col gap-1.5 items-start">
-                                            <c:forEach var="cat" items="${l.getListaCategorias()}">
+                                            <c:forEach var="cat" items="${l.listaCategorias}">
                                                 <span
                                                     class="border border-slate-500 rounded-xl px-2 py-0.5 text-xs whitespace-nowrap">
                                                     ${cat}
@@ -161,18 +161,17 @@
 
                                     <td class="py-2 px-6 text-left text-slate-400">${l.especialidad}</td>
                                     <td class="py-2 px-6 text-left text-slate-400 whitespace-nowrap">
-                                        ${l.getFechaSoloFecha()}</td>
+                                        ${l.fechaSoloFecha}</td>
                                     <td class="py-2 px-6 text-left text-slate-400">
-                                        <button class="cursor-pointer flex items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                 viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                                                 stroke-linecap="round" stroke-linejoin="round"
-                                                 class="lucide lucide-ellipsis-icon lucide-ellipsis">
-                                            <circle cx="12" cy="12" r="1" />
-                                            <circle cx="19" cy="12" r="1" />
-                                            <circle cx="5" cy="12" r="1" />
-                                            </svg>
-                                        </button>
+                                        <div class="flex gap-4 items-center h-full">
+                                            <button type="button"  class="cursor-pointer bg-yellow-500 p-1 rounded-sm text-white">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-pencil-icon lucide-pencil"><path d="M21.174 6.812a1 1 0 0 0-3.986-3.987L3.842 16.174a2 2 0 0 0-.5.83l-1.321 4.352a.5.5 0 0 0 .623.622l4.353-1.32a2 2 0 0 0 .83-.497z"/><path d="m15 5 4 4"/></svg>
+                                            </button>
+                                            <button type="button"  class="cursor-pointer bg-red-500 p-1 rounded-sm text-white"
+                                                    onclick="confirmarEliminar('${l.id_local}', '${l.nombre}')">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash2-icon lucide-trash-2"><path d="M10 11v6"/><path d="M14 11v6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M3 6h18"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>
+                                            </button>
+                                        </div>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -199,7 +198,7 @@
                                      stroke-linejoin="round" class="lucide lucide-chevron-right-icon lucide-chevron-right">
                                 <path d="m9 18 6-6-6-6" />
                                 </svg>
-                            </div>f
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -318,16 +317,25 @@
     </body>
     <script src="./app.js"></script>
     <script>
-        const btnAgrear = document.getElementById("btnAgregar");
-        const closeFormAgregar = document.getElementById("closeFormAgregar");
-        btnAgrear.addEventListener("click", function () {
-            const formAgregar = document.getElementById("formNuevoLocal");
-            formAgregar.classList.remove("hidden");
-        });
-        closeFormAgregar.addEventListener("click", function () {
-            const formAgregar = document.getElementById("formNuevoLocal");
-            formAgregar.classList.add("hidden");
-        });
+            const btnAgrear = document.getElementById("btnAgregar");
+            const closeFormAgregar = document.getElementById("closeFormAgregar");
+            btnAgrear.addEventListener("click", function () {
+                const formAgregar = document.getElementById("formNuevoLocal");
+                formAgregar.classList.remove("hidden");
+            });
+            closeFormAgregar.addEventListener("click", function () {
+                const formAgregar = document.getElementById("formNuevoLocal");
+                formAgregar.classList.add("hidden");
+            });
+            
+            function confirmarEliminar(id, nombre) {
+            // El 'confirm' devuelve true si aceptan y false si cancelan
+            const respuesta = confirm("¿Estás seguro de que deseas eliminar el local: " + nombre + "?");
+            if (respuesta) {
+                // Si acepta, mandamos el ID al servlet por la URL
+                window.location.href = "CrudLocalesServlet?accion=eliminar&id=" + id;
+            }
+}
     </script>
 
 </html>

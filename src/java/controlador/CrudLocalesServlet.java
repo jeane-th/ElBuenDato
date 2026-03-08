@@ -31,23 +31,37 @@ public class CrudLocalesServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // 1. Instanciamos el DAO para acceder a sus métodos
         LocalDAO LocalDao = new LocalDAOImpl();
         DistritoDAO DistritoDao = new DistritoDAOImpl();
 
-        // 2. Llamamos al método listar() que ya tiene el SQL con JOIN y GROUP_CONCAT
-        // Esto nos devuelve la lista de objetos 'Local'
-        List<Local> listaLocales = LocalDao.listar();
-        List<Distrito> listaDistritos = DistritoDao.listar();
+        String accion = request.getParameter("accion");
 
+        if (accion == null) {
+            accion = "listar";
+        }
+        
+        try {
+            if (accion.equals("eliminar")) {
+                // Lógica de eliminar
+                int id = Integer.parseInt(request.getParameter("id"));
+                LocalDao.eliminar(id);
+                // IMPORTANTE: Después de eliminar, redirigimos al servlet limpio
+                response.sendRedirect("CrudLocalesServlet");
+                return; // Cortamos la ejecución aquí para que no intente hacer el forward de abajo
+            }
 
-        // 3. Guardamos la lista en el "baúl" de la petición (request)
-        // El primer parámetro es el "apodo" que usaremos en el JSP (${locales})
-        request.setAttribute("locales", listaLocales);
-        request.setAttribute("distritos", listaDistritos);
+            // Si la acción es "listar" o cualquier otra cosa que no sea eliminar
+            List<Local> listaLocales = LocalDao.listar();
+            List<Distrito> listaDistritos = DistritoDao.listar();
 
-        // 4. Despachamos (enviamos) la petición hacia el archivo JSP que tiene la tabla
-        request.getRequestDispatcher("index.jsp").forward(request, response);
+            request.setAttribute("locales", listaLocales);
+            request.setAttribute("distritos", listaDistritos);
+            request.getRequestDispatcher("index.jsp").forward(request, response);
+
+        } catch (Exception e) {
+            System.err.println("Error en el Servlet: " + e.getMessage());
+        }
+
     }
 
     @Override

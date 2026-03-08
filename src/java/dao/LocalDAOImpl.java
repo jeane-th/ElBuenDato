@@ -35,20 +35,14 @@ public class LocalDAOImpl implements LocalDAO {
         // 2. DEFINICIÓN DEL SQL: 
         // Escribimos la instrucción en lenguaje SQL que queremos ejecutar en la base de datos.
         //String sql = "SELECT * FROM locales";
-        String sql = "SELECT \n"
-                + "    l.nombre,\n"
-                + "    l.direccion,\n"
-                + "    l.pagina_web,\n"
-                + "    d.nombre_distrito,\n"
-                + "    GROUP_CONCAT(c.nombre_categoria SEPARATOR ', ') AS categoria,\n"
-                + "    l.especialidad,\n"
-                + "    l.fecha_registro\n"
-                + "FROM locales l\n"
-                + "INNER JOIN distritos d ON l.id_distrito = d.id_distrito\n"
-                + "INNER JOIN local_categoria lc ON l.id_local = lc.id_local\n"
-                + "INNER JOIN categorias c ON lc.id_categoria = c.id_categoria\n"
-                + "GROUP BY l.id_local \n"
-                + "";
+        String sql = "SELECT l.id_local, l.nombre, l.direccion, l.pagina_web, d.nombre_distrito, "
+                + "GROUP_CONCAT(c.nombre_categoria SEPARATOR ', ') AS categoria, "
+                + "l.especialidad, l.fecha_registro "
+                + "FROM locales l "
+                + "INNER JOIN distritos d ON l.id_distrito = d.id_distrito "
+                + "INNER JOIN local_categoria lc ON l.id_local = lc.id_local "
+                + "INNER JOIN categorias c ON lc.id_categoria = c.id_categoria "
+                + "GROUP BY l.id_local";
 
         try {
             // 3. APERTURA DE CONEXIÓN: 
@@ -77,6 +71,7 @@ public class LocalDAOImpl implements LocalDAO {
                 // 8. EXTRACCIÓN Y ASIGNACIÓN (GETTERS Y SETTERS): 
                 // rs.get... ("nombre_columna") saca el dato crudo de la tabla de la BD.
                 // loc.set... (...) guarda ese dato dentro de los atributos de nuestro objeto Java.
+                loc.setId_local(rs.getInt("id_local"));
                 loc.setNombre(rs.getString("nombre"));
                 loc.setDireccion(rs.getString("direccion"));
                 loc.setPagina_web(rs.getString("pagina_web"));
@@ -214,6 +209,52 @@ public class LocalDAOImpl implements LocalDAO {
                 }
             } catch (SQLException e) {
                 System.err.println("Error al cerrar recursos: " + e.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public boolean eliminar(int id_local) {
+        String sqlCategorias = "DELETE FROM local_categoria WHERE id_local = ?";
+        String sqlLocal = "DELETE FROM locales WHERE id_local = ?";
+
+        try {
+            con = Conexion.getConexion();
+            con.setAutoCommit(false);
+
+// Borrar categorías
+            ps = con.prepareStatement(sqlCategorias);
+            ps.setInt(1, id_local);
+            ps.executeUpdate();
+
+            // Borrar local
+            ps = con.prepareStatement(sqlLocal);
+            ps.setInt(1, id_local);
+            int filasAfectadas = ps.executeUpdate();
+
+            con.commit(); // Si todo salió bien, guardamos cambios
+            return filasAfectadas > 0;
+
+        } catch (SQLException e) {
+            try {
+                if (con != null) {
+                    con.rollback();
+                }
+            } catch (SQLException ex) {
+            }
+            System.err.println("Error al eliminar: " + e.getMessage());
+            return false;
+        } finally {
+            try {
+
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al cerrar BD: " + e.getMessage());
             }
         }
     }
