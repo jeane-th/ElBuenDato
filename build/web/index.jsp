@@ -242,9 +242,9 @@
                                     <select name="id_distrito"
                                             class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2 appearance-none w-full">
                                         <option class="hidden" value="" disabled selected>Seleciona un distrito</option>
-                                        <option value="1">Miraflores</option>
-                                        <option value="2">San Isidro</option>
-                                        <option value="3">Barranco</option>
+                                        <c:forEach var="dist" items="${distritos}">
+                                            <option value="${dist.id_distrito}">${dist.nombre_distrito}</option>
+                                        </c:forEach>
                                     </select>
                                     <!-- La flecha se posiciona encima del select -->
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"

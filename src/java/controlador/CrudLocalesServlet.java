@@ -4,6 +4,8 @@
  */
 package controlador;
 
+import dao.DistritoDAO;
+import dao.DistritoDAOImpl;
 import dao.LocalDAO;
 import dao.LocalDAOImpl;
 import java.io.IOException;
@@ -14,6 +16,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.util.List;
+import modelo.Distrito;
 import modelo.Local;
 
 /**
@@ -29,15 +32,19 @@ public class CrudLocalesServlet extends HttpServlet {
             throws ServletException, IOException {
 
         // 1. Instanciamos el DAO para acceder a sus métodos
-        LocalDAO dao = new LocalDAOImpl();
+        LocalDAO LocalDao = new LocalDAOImpl();
+        DistritoDAO DistritoDao = new DistritoDAOImpl();
 
         // 2. Llamamos al método listar() que ya tiene el SQL con JOIN y GROUP_CONCAT
         // Esto nos devuelve la lista de objetos 'Local'
-        List<Local> listaLocales = dao.listar();
+        List<Local> listaLocales = LocalDao.listar();
+        List<Distrito> listaDistritos = DistritoDao.listar();
+
 
         // 3. Guardamos la lista en el "baúl" de la petición (request)
         // El primer parámetro es el "apodo" que usaremos en el JSP (${locales})
         request.setAttribute("locales", listaLocales);
+        request.setAttribute("distritos", listaDistritos);
 
         // 4. Despachamos (enviamos) la petición hacia el archivo JSP que tiene la tabla
         request.getRequestDispatcher("index.jsp").forward(request, response);
