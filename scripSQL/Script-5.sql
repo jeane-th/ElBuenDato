@@ -130,6 +130,6 @@ INSERT INTO local_categoria (id_local, id_categoria) VALUES (11, 2);
 
 
 
-
+SELECT * FROM distritos d 
 
 

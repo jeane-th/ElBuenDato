@@ -4,9 +4,9 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Proyectos/ElBuenDato/web/index.jsp</file>
-            <file>file:/C:/Proyectos/ElBuenDato/src/java/controlador/CrudLocalesServlet.java</file>
-            <file>file:/C:/Proyectos/ElBuenDato/src/java/test/Test.java</file>
+            <file>file:/C:/Proyectos/ElBuenDato/src/java/modelo/Local.java</file>
             <file>file:/C:/Proyectos/ElBuenDato/src/java/dao/LocalDAOImpl.java</file>
+            <file>file:/C:/Proyectos/ElBuenDato/src/java/controlador/CrudLocalesServlet.java</file>
         </group>
     </open-files>
 </project-private>

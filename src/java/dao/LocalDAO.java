@@ -18,6 +18,7 @@ public interface LocalDAO {
     List<Local> listar();
     boolean insertar(Local loc, int[] idsCategorias);
     boolean eliminar(int id_local);
+    boolean update (Local loc, int[] idsCategorias);
 
     // Pelicula buscar(int id_local);
     // boolean actualizar(Local p);

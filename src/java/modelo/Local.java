@@ -13,6 +13,10 @@ import java.text.SimpleDateFormat;
  */
 public class Local {
 
+    public static int[] getCategorias() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private int id_local;
     private String nombre;
     private String direccion;
@@ -25,8 +29,11 @@ public class Local {
     private String distrito; // nombre string
     private String categoria;
 
+    private String ids_categorias;
+    
     public Local() {
     }
+    
 
     public Local(String nombre, String direccion, int id_distrito, String pagina_web, String especialidad) {
         this.nombre = nombre;
@@ -107,6 +114,16 @@ public class Local {
     public void setCategoria(String nombres_categoria) {
         this.categoria = nombres_categoria;
     }
+
+    public String getIds_categorias() {
+        return ids_categorias;
+    }
+
+    public void setIds_categorias(String ids_categorias) {
+        this.ids_categorias = ids_categorias;
+    }
+    
+    
 
     // dar formato fecha
     public String getFechaSoloFecha() {
