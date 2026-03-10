@@ -8,7 +8,10 @@ import dao.DistritoDAO;
 import dao.DistritoDAOImpl;
 import dao.LocalDAO;
 import dao.LocalDAOImpl;
+import dao.UsuarioDAO;
+import dao.UsuarioDAOImpl;
 import modelo.Local;
+import modelo.Usuario;
 
 /**
  *
@@ -20,18 +23,18 @@ public class Test {
 
         //dao.listar().forEach(System.out::println);
         // 1. Instanciamos el DAO
-        LocalDAO dao = new LocalDAOImpl();
+     //   LocalDAO dao = new LocalDAOImpl();
         //dao.eliminar(15);
         //DistritoDAO dao = new DistritoDAOImpl();
         //dao.listar().forEach(System.out::println);
         // 2. Creamos el objeto Local (asegúrate que tu constructor coincida con estos parámetros)
         // nombre, direccion, id_distrito, pagina_web, especialidad
-        Local nuevo = new Local("La Lucha Sanguchería", "Av. Santa Cruz 847", 1, "https://lalucha.com.pe", "Sánguches ricos");
+      //  Local nuevo = new Local("La Lucha Sanguchería", "Av. Santa Cruz 847", 1, "https://lalucha.com.pe", "Sánguches ricos");
 
         // 3. Creamos el array de IDs de categorías (ejemplo: 1=Bar, 2=Restaurante)
-        int[] categoriasSeleccionadas = {1, 2};
+        //int[] categoriasSeleccionadas = {1, 2};
         // 4. Ejecutamos el método y verificamos
-        boolean exito = dao.update(nuevo, categoriasSeleccionadas);
+        //boolean exito = dao.update(nuevo, categoriasSeleccionadas);
 
         /* if (exito) {
             System.out.println("¡Local y categorías guardados correctamente!");
@@ -39,5 +42,10 @@ public class Test {
             System.out.println("Hubo un error al insertar.");
         }
          */
+        
+        // insertar usuario
+        UsuarioDAO dao= new UsuarioDAOImpl();
+        dao.insertar(new Usuario("Jose","Lopez","Josee@gmail.com","123456"));
+        
     }
 }

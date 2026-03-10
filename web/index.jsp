@@ -329,7 +329,6 @@
 
             </footer>
         </body>
-        <script src="./app.js"></script>
     <script>
         // 1. Referencias principales
         const modal = document.getElementById("formNuevoLocal");

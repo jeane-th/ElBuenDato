@@ -18,6 +18,7 @@ CREATE TABLE usuarios (
     correo VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(255) NOT NULL,
     rol ENUM('USER', 'ADMIN') DEFAULT 'USER',
+ --   estado BOOLEAN () DEFAULT 'USER',
     fecha_registro TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 

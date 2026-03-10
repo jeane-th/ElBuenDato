@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 
 /**
@@ -14,34 +15,34 @@ public class Usuario {
 
     private int id_usuario;
     private String nombre;
-    private String email;
+    private String apellido;
+    private String correo;
     private String password;
-    private LocalDateTime fecha_registro;
+    private String rol;
     private boolean estado;
-    private int rol;
+    private LocalDateTime fecha_registro;
 
     // Constructores
     public Usuario() {
     }
 
-    public Usuario(int id_usuario, String nombre, String email, String password, LocalDateTime fecha_registro, boolean estado, int rol) {
-        this.id_usuario = id_usuario;
+    public Usuario(String nombre, String apellido, String correo, String password) {
         this.nombre = nombre;
-        this.email = email;
+        this.apellido = apellido;
+        this.correo = correo;
         this.password = password;
-        this.fecha_registro = fecha_registro;
-        this.estado = estado;
-        this.rol = rol;
     }
 
-    public Usuario(String nombre, String email, String password, boolean estado, int rol) {
+    public Usuario(int id_usuario, String nombre, String apellido, String correo, String password, String rol, boolean estado, LocalDateTime fecha_registro) {
+        this.id_usuario = id_usuario;
         this.nombre = nombre;
-        this.email = email;
+        this.apellido = apellido;
+        this.correo = correo;
         this.password = password;
-        this.estado = estado;
         this.rol = rol;
+        this.estado = estado;
+        this.fecha_registro = fecha_registro;
     }
-    // Getters y Setters
 
     public int getId_usuario() {
         return id_usuario;
@@ -59,12 +60,20 @@ public class Usuario {
         this.nombre = nombre;
     }
 
-    public String getEmail() {
-        return email;
+    public String getApellido() {
+        return apellido;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setApellido(String apellido) {
+        this.apellido = apellido;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public String getPassword() {
@@ -75,13 +84,15 @@ public class Usuario {
         this.password = password;
     }
 
-    public LocalDateTime getFecha_registro() {
-        return fecha_registro;
+    public String getRol() {
+        return rol;
     }
 
-    public void setFecha_registro(LocalDateTime fecha_registro) {
-        this.fecha_registro = fecha_registro;
+    public void setRol(String rol) {
+        this.rol = rol;
     }
+
+
 
     public boolean isEstado() {
         return estado;
@@ -91,11 +102,27 @@ public class Usuario {
         this.estado = estado;
     }
 
-    public int getrol() {
-        return rol;
+    
+    public LocalDateTime getFecha_registro() {
+        return fecha_registro;
     }
 
-    public void setrol(int rol) {
-        this.rol = rol;
+    public void setFecha_registro(LocalDateTime fecha_registro) {
+        this.fecha_registro = fecha_registro;
     }
+
+    // dar formato fecha
+    public String getFechaSoloFecha() {
+        if (this.fecha_registro != null) {
+            return new SimpleDateFormat("dd-MM-yyyy").format(this.fecha_registro);
+        }
+        return "";
+    }
+
+    @Override
+    public String toString() {
+        return "Usuario{" + "id_usuario=" + id_usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", password=" + password + ", rol=" + rol + ", estado=" + estado + ", fecha_registro=" + fecha_registro + '}';
+    }
+
+
 }
