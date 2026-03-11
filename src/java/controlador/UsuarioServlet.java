@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import modelo.Usuario;
 
 /**
@@ -60,7 +61,7 @@ public class UsuarioServlet extends HttpServlet {
         u.setNombre(request.getParameter("nombre"));
         u.setApellido(request.getParameter("apellido"));
         u.setCorreo(request.getParameter("correo"));
-        u.setPassword(request.getParameter("password"));
+        u.setContrasena(request.getParameter("contrasena"));
 
         if (dao.insertar(u)) {
             // Registro exitoso, lo mandamos al login o al inicio
@@ -74,7 +75,29 @@ public class UsuarioServlet extends HttpServlet {
 // Método para manejar el login (Bloque 2)
     private void validarLogin(HttpServletRequest request, HttpServletResponse response, UsuarioDAO dao)
             throws ServletException, IOException {
-        // Aquí irá tu lógica de buscar usuario por correo y password
+        // Aquí irá tu lógica de buscar usuario por correo y contrasena
+        String correo = request.getParameter("correo"); // Lo que viene del input name="correo"
+        String contrasena = request.getParameter("contrasena");
+
+        Usuario u = dao.login(correo, contrasena);
+        if (u != null) {
+            // Creamos la sesión
+            HttpSession session = request.getSession();
+            // Guardamos al objeto usuario (para usar su nombre, rol, etc.)
+            session.setAttribute("usuario", u);
+            session.setAttribute("rol", u.getRol());
+
+            if ("Admin".equalsIgnoreCase(u.getRol())) {
+                response.sendRedirect(request.getContextPath() + "/dashboardAdmin");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/index.jsp");
+            }
+
+        } else {
+            // Si los datos están mal
+            request.setAttribute("error", "Correo o contrasena incorrectos");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
     }
 
 }

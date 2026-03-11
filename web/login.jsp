@@ -1,11 +1,8 @@
 <%-- 
-        Document   : registro
-        Created on : 10 mar 2026, 8:38:23
-        Author     : jtafu
+    Document   : login
+    Created on : 11 mar 2026, 8:38:23
+    Author     : jtafu
 --%>
-
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -14,7 +11,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Registro</title>
+        <title>Login</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     </head>
@@ -42,7 +39,7 @@
                         <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
                         <circle cx="12" cy="7" r="4" />
                         </svg>
-                        <p>Inicia sesiÃ³n</p>
+                        <p>Registrar</p>
                     </button>
                 </div>
             </div>
@@ -52,36 +49,22 @@
             <div id="formNuevoLocal" class="bg-slate-950/90 w-full h-full py-20">
                 <form id="formRegistro" action="UsuarioServlet" method="POST"
                       class="bg-slate-900 text-white max-w-sm p-6 m-auto border-1 border-slate-500 rounded-xl">
-                    <input type="hidden" name="accion" value="registrar">
+                    <input type="hidden" name="accion" value="login">
                     <!-- Header modal -->
                     <div class="border-b border-slate-500 pb-4 text-center">
-                        <h2 class="font-bold text-lg">Registro</h2>
+                        <h2 class="font-bold text-lg">Inicio de sesión</h2>
                     </div>
                     <!-- Body modal -->
                     <div class=" flex flex-col gap-5">
                         <div class="w-full grid grid-cols-1 gap-5 gap-5 mt-8 mb-6">
-                            <div class="flex flex-col gap-2">
-                                <label for="nombre" class="font-semibold">Nombre *</label>
-                                <input type="text" id="nombre"
-                                       class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2"
-                                       placeholder="Nombre" name="nombre">
-                            </div>
-                            <div class="flex flex-col gap-2">
-                                <label for="apellido" class="font-semibold">Apellido</label>
-                                <input type="text" id="Apellido"
-                                       class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2"
-                                       placeholder="Apellido" name="apellido">
-                            </div>
-
                             <div class="flex flex-col gap-2">
                                 <label for="correo" class="font-semibold">Correo *</label>
                                 <input type="correo" id="correo"
                                        class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2"
                                        placeholder="usuario@correo.com" name="correo">
                             </div>
-
                             <div class="flex flex-col gap-2">
-                                <label for="contrasena" class="font-semibold">Contrasena *</label>
+                                <label for="contrasena" class="font-semibold">contrasena *</label>
                                 <input type="password" id="contrasena"
                                        class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2"
                                        placeholder="************" name="contrasena">
@@ -90,7 +73,7 @@
 
                         <button type="submit"
                                 class="gap-2 bg-violet-400 pl-4 pr-4 py-2 font-semibold rounded-xl cursor-pointer w-auto text-center">
-                            Registarse
+                            Iniciar sesión
                         </button>
                     </div>
                     <div class="text-red-200 my-3 text-center max-w-sm mx-auto">
@@ -117,7 +100,7 @@
                 </div>
                 <!-- <div class="my-4 w-1/2 h-px bg-slate-800"></div> -->
                 <div class="mb-4 my-4">
-                    <p>Â© 2026 Todos los derechos reservados</p>
+                    <p>© 2026 Todos los derechos reservados</p>
                 </div>
             </div>
 
@@ -133,24 +116,18 @@
         });
 
         validate
-                .addField('#nombre', [
-                    {rule: 'required', errorMessage: 'Complete su nombre'},
-                    {rule: 'minLength', value: 3, errorMessage: 'MÃ­nimo 3 caracteres'}
-                ])
-                .addField('#correo', [// He usado #correo porque asÃ­ lo tenÃ­as en el ID del HTML
+                .addField('#correo', [// He usado #correo porque así lo tenías en el ID del HTML
                     {rule: 'required', errorMessage: 'Complete su correo'},
-                    {rule: 'correo', errorMessage: 'Correo invÃ¡lido'}
+                    {rule: 'email', errorMessage: 'Correo inválido'}
                 ])
                 .addField('#contrasena', [
                     {rule: 'required', errorMessage: 'Complete su contrasena'},
-                    {rule: 'minLength', value: 6, errorMessage: 'MÃ­nimo 6 caracteres'}
-                ]) // AQUÃ QUITÃ‰ EL PUNTO Y COMA
+                    {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
+                ]) // AQUÍ QUITÉ EL PUNTO Y COMA
                 .onSuccess((event) => {
-                    console.log('ValidaciÃ³n exitosa, enviando...');
+                    console.log('Validación exitosa, enviando...');
                     event.target.submit();
                 });
-
-
 
     </script>
 

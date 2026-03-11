@@ -1,6 +1,6 @@
 <%-- 
-        Document   : index
-        Created on : 7 feb 2026, 21:49:08
+        Document   : registro
+        Created on : 10 mar 2026, 8:38:23
         Author     : jtafu
 --%>
 
@@ -14,7 +14,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Document</title>
+        <title>Registro</title>
         <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
     </head>
@@ -75,16 +75,16 @@
 
                             <div class="flex flex-col gap-2">
                                 <label for="correo" class="font-semibold">Correo *</label>
-                                <input type="email" id="email"
+                                <input type="correo" id="correo"
                                        class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2"
                                        placeholder="usuario@correo.com" name="correo">
                             </div>
 
                             <div class="flex flex-col gap-2">
-                                <label for="password" class="font-semibold">Contraseña *</label>
-                                <input type="password" id="password"
+                                <label for="contrasena" class="font-semibold">Contrasena *</label>
+                                <input type="password" id="contrasena"
                                        class="bg-slate-800 rounded-xl border-1 border-slate-500 placeholder-gray-400 p-2"
-                                       placeholder="************" name="password">
+                                       placeholder="************" name="contrasena">
                             </div>
                         </div>
 
@@ -137,12 +137,12 @@
                     {rule: 'required', errorMessage: 'Complete su nombre'},
                     {rule: 'minLength', value: 3, errorMessage: 'Mínimo 3 caracteres'}
                 ])
-                .addField('#email', [// He usado #email porque así lo tenías en el ID del HTML
-                    {rule: 'required', errorMessage: 'Complete su email'},
-                    {rule: 'email', errorMessage: 'Email inválido'}
+                .addField('#correo', [// He usado #correo porque así lo tenías en el ID del HTML
+                    {rule: 'required', errorMessage: 'Complete su correo'},
+                    {rule: 'correo', errorMessage: 'Correo inválido'}
                 ])
-                .addField('#password', [
-                    {rule: 'required', errorMessage: 'Complete su contraseña'},
+                .addField('#contrasena', [
+                    {rule: 'required', errorMessage: 'Complete su contrasena'},
                     {rule: 'minLength', value: 6, errorMessage: 'Mínimo 6 caracteres'}
                 ]) // AQUÍ QUITÉ EL PUNTO Y COMA
                 .onSuccess((event) => {

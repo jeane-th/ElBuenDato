@@ -3,10 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Proyectos/ElBuenDato/web/index.jsp</file>
-            <file>file:/C:/Proyectos/ElBuenDato/src/java/modelo/Local.java</file>
-            <file>file:/C:/Proyectos/ElBuenDato/src/java/dao/LocalDAOImpl.java</file>
-            <file>file:/C:/Proyectos/ElBuenDato/src/java/controlador/CrudLocalesServlet.java</file>
+            <file>file:/C:/Proyectos/ElBuenDato/web/registro.jsp</file>
+            <file>file:/C:/Proyectos/ElBuenDato/web/login.jsp</file>
+            <file>file:/C:/Proyectos/ElBuenDato/src/java/controlador/UsuarioServlet.java</file>
+            <file>file:/C:/Proyectos/ElBuenDato/src/java/modelo/Usuario.java</file>
+            <file>file:/C:/Proyectos/ElBuenDato/src/java/dao/UsuarioDAO.java</file>
+            <file>file:/C:/Proyectos/ElBuenDato/src/java/dao/UsuarioDAOImpl.java</file>
         </group>
     </open-files>
 </project-private>

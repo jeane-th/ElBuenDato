@@ -12,4 +12,5 @@ import modelo.Usuario;
  */
 public interface UsuarioDAO {
     boolean insertar(Usuario u);
+    public Usuario login(String correo, String contrasena);
 }

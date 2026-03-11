@@ -17,7 +17,7 @@ public class Usuario {
     private String nombre;
     private String apellido;
     private String correo;
-    private String password;
+    private String contrasena;
     private String rol;
     private boolean estado;
     private LocalDateTime fecha_registro;
@@ -26,19 +26,19 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(String nombre, String apellido, String correo, String password) {
+    public Usuario(String nombre, String apellido, String correo, String contrasena) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.password = password;
+        this.contrasena = contrasena;
     }
 
-    public Usuario(int id_usuario, String nombre, String apellido, String correo, String password, String rol, boolean estado, LocalDateTime fecha_registro) {
+    public Usuario(int id_usuario, String nombre, String apellido, String correo, String contrasena, String rol, boolean estado, LocalDateTime fecha_registro) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.correo = correo;
-        this.password = password;
+        this.contrasena = contrasena;
         this.rol = rol;
         this.estado = estado;
         this.fecha_registro = fecha_registro;
@@ -76,12 +76,12 @@ public class Usuario {
         this.correo = correo;
     }
 
-    public String getPassword() {
-        return password;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public String getRol() {
@@ -121,7 +121,7 @@ public class Usuario {
 
     @Override
     public String toString() {
-        return "Usuario{" + "id_usuario=" + id_usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", password=" + password + ", rol=" + rol + ", estado=" + estado + ", fecha_registro=" + fecha_registro + '}';
+        return "Usuario{" + "id_usuario=" + id_usuario + ", nombre=" + nombre + ", apellido=" + apellido + ", correo=" + correo + ", contrasena=" + contrasena + ", rol=" + rol + ", estado=" + estado + ", fecha_registro=" + fecha_registro + '}';
     }
 
 
